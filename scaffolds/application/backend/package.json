@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "0.0.0",
-  "description": "",
+  "description": "${application_description}",
   "author": "",
   "private": true,
   "main": "main.js",

@@ -23,6 +23,9 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+echo "test container with"
+echo "docker run --rm -p 8080:8080 -e PORT=8080 -e FSM_CLIENT_IDENTIFIER='$fsm_client_identifier' -e FSM_CLIENT_SECRET='$fsm_client_secret' $docker_registry/$application_name:$application_version"
+
 echo "======docker push==================================="
 docker push $docker_registry/$application_name:$application_version
 if [ $? -ne 0 ]; then
@@ -43,3 +46,4 @@ if which helm >/dev/null; then
 fi
 
 echo "Deployments artifacts are generated successfully!"
+echo "helm install ./helm/$application_name --name $application_name --namespace <insert-namespace> --set kyma.apiv1.enabled=true --tls"

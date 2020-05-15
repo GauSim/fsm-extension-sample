@@ -40,7 +40,11 @@ spec:
               port: http
           env:
           - name: PORT
-            value: "{{ .Values.service.internalPort }}" 
+            value: "{{ .Values.service.internalPort }}"
+          - name: FSM_CLIENT_IDENTIFIER
+            value: "{{ .Values.fsm.clientIdentifier }}"
+          - name: FSM_CLIENT_SECRET
+            value: "{{ .Values.fsm.clientSecret }}"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

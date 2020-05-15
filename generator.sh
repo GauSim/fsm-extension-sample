@@ -54,25 +54,41 @@ while true; do
   fi 
 done
 
+read -p "FSM API client identifier? " fsm_client_identifier
+read -p "FSM API client secret? " fsm_client_secret
+
+
 mkdir ./$application_name
 cp -r ./scaffolds/* ./$application_name
 mv ./$application_name/helm/\${application_name} ./$application_name/helm/${application_name}
 
 sed "s/\${application_name}/${application_name}/g" ./$application_name/helm/$application_name/Chart.yaml
+sed "s|\${application_name}|${application_name}|g" ./$application_name/application/frontend/dist/frontend/index.html
 sed "s|\${application_icon}|${application_icon}|g" ./$application_name/helm/$application_name/Chart.yaml
 sed "s|\${application_description}|${application_description}|g" ./$application_name/helm/$application_name/Chart.yaml
+sed "s|\${application_description}|${application_description}|g" ./$application_name/application/backend/package.json
+sed "s|\${application_description}|${application_description}|g" ./$application_name/application/frontend/dist/frontend/index.html
 sed "s/\${helm_chart_version}/${helm_chart_version}/g" ./$application_name/helm/$application_name/Chart.yaml
 sed "s/\${application_version}/${application_version}/g" ./$application_name/helm/$application_name/Chart.yaml
 sed "s|\${registry}|${docker_registry}|g" ./$application_name/helm/$application_name/values.yaml
 sed "s/\${image_name}/${application_name}/g" ./$application_name/helm/$application_name/values.yaml
+sed "s|\${fsm_client_identifier}|${fsm_client_identifier}|g" ./$application_name/helm/$application_name/values.yaml
+sed "s|\${fsm_client_secret}|${fsm_client_secret}|g" ./$application_name/helm/$application_name/values.yaml
+
+echo "FSM_CLIENT_IDENTIFIER=${fsm_client_identifier}" >> ./$application_name/application/backend/.env
+echo "FSM_CLIENT_SECRET=${fsm_client_secret}" >> ./$application_name/application/backend/.env
 
 cat >./$application_name/appconfig <<EOL
 application_name=${application_name}
 application_version=${application_version}
 application_icon=${application_icon}
 application_description=${application_description}
+fsm_client_identifier=${fsm_client_identifier}
+fsm_client_secret=${fsm_client_secret}
 helm_chart_version=${helm_chart_version}
 docker_registry=${docker_registry}
 EOL
 
 echo "Project $application_name is created successfully!"
+echo "You can build and deploy it now with:"
+echo "cd $application_name && ./build.sh"

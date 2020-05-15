@@ -10,8 +10,8 @@ export class ConfigService {
     // ensure vars are set on boot
     [
       'PORT',
-      'CLIENT_IDENTIFIER',
-      'CLIENT_SECRET'
+      'FSM_CLIENT_IDENTIFIER',
+      'FSM_CLIENT_SECRET'
     ]
       .forEach(key => this.getValue(key));
   }
@@ -44,11 +44,11 @@ export class ConfigService {
   }
 
   public getClientIdentifier() {
-    return this.getValue('CLIENT_IDENTIFIER', true);
+    return this.getValue('FSM_CLIENT_IDENTIFIER', true);
   }
 
   public getClientSecret() {
-    return this.getValue('CLIENT_SECRET', true);
+    return this.getValue('FSM_CLIENT_SECRET', true);
   }
 
 }

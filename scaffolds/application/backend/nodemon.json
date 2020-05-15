@@ -9,8 +9,6 @@
   "exec": "node --inspect=127.0.0.1:9223 -r ts-node/register -- src/main.ts",
   "env": {
     "PORT": 4201,
-    "MODE": "local",
-    "CLIENT_IDENTIFIER": "<insert-here>",
-    "CLIENT_SECRET": "<insert-here>"
+    "MODE": "local"
   }
 }

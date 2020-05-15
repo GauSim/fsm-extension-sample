@@ -8,6 +8,10 @@ image:
   name: ${image_name}
   pullPolicy: Always
 
+fsm: 
+  clientIdentifier: "${fsm_client_secret}"
+  clientSecret: "${fsm_client_identifier}"
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""

@@ -2,7 +2,8 @@
     "name": "frontend",
     "version": "0.0.0",
     "scripts": {
-        "start:local": "http-server . --port 1234"
+        "start:local": "http-server . --port 1234",
+        "build": ""
     },
     "private": true,
     "dependencies": {
